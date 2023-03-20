@@ -3,13 +3,12 @@
 const figlet = require('figlet');
 const program = require('commander');
 
-const commands = require('./lib/index');
-
 function setupCli() {
   console.log(figlet.textSync('DELIVER', {
     font: 'Doom'
   }));
-  
+
+  const commands = require('./lib/index');  
   commands.forEach(c => {
     const cdef = c.definition();
 
