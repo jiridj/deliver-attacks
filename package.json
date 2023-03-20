@@ -1,0 +1,28 @@
+{
+  "name": "deliver-attacks",
+  "version": "0.1.0",
+  "description": "A collection of code examples that illustrate how the vulnerabilities in the DELIVER API can be exploited.",
+  "main": "index.js",
+  "bin": {
+    "deliver": "./index.js"
+  },
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiridj/deliver-attacks.git"
+  },
+  "author": "Jiri De Jagere <jiridj@gmail.com> (https://jiridj.be/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jiridj/deliver-attacks/issues"
+  },
+  "homepage": "https://github.com/jiridj/deliver-attacks#readme",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "commander": "^10.0.0",
+    "figlet": "^1.5.2"
+  }
+}
