@@ -1,4 +1,4 @@
-#! /user/bin/env node
+#! /usr/bin/env node
 
 const figlet = require('figlet');
 const program = require('commander');
