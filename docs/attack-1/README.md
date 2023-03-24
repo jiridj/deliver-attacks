@@ -16,39 +16,9 @@ When you look at a JWT token you'll notice that the token is not human readable.
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VlNzVkMzRkNWQ4YmI0MTAwNDNkN2IiLCJlbWFpbCI6Im92ZXJyaWxsbzBAcmVkY3Jvc3Mub3JnIiwicGFzc3dvcmQiOiIkMmIkMTAkSkR3dnhpVFFPVllKaGpCUXJ2QXJwLlM4VTg1RW1WaTE1VThocmM3NXYvQ0lpRmFvSzV0UzYiLCJmaXJzdF9uYW1lIjoiT2RpbGxlIiwibGFzdF9uYW1lIjoiVmVycmlsbG8iLCJhZGRyZXNzIjoiOSBEcmV3cnkgQ3Jvc3NpbmciLCJjaXR5IjoiRG9uZ2R1IiwiY291bnRyeSI6IkNoaW5hIiwicGhvbmUiOiIrODYgKDcwOSkgNzEzLTA2MzAiLCJjcmVkaXRfY2FyZCI6IjQwNDEzNzg3NTUzNzc0NzMiLCJpYXQiOjE2NzkzMjU2MzV9.MniicPtbmYAGgyxnlsw5mS7S4d1r6vxbaQLEPYBkDLY
 ```
 
-You can use the deliver CLI to decode the JWT token. Alternatively you can visit [jwt.io](https://jwt.io) and paste the token there. You will see the same information. 
+You can use [jwt_tool](https://github.com/ticarpi/jwt_tool) for a lot of things, including listing token content. Alternatively you can visit [jwt.io](https://jwt.io) and paste the token there. You will see the same information. 
 
-```bash
-deliver parse-jwt demos/attack-1/stolen-jwt.txt
-
-______ _____ _     _____ _   _ ___________
-|  _  \  ___| |   |_   _| | | |  ___| ___ \
-| | | | |__ | |     | | | | | | |__ | |_/ /
-| | | |  __|| |     | | | | | |  __||    /
-| |/ /| |___| |_____| |_\ \_/ / |___| |\ \
-|___/ \____/\_____/\___/ \___/\____/\_| \_|
-
-
-HEADER:
-{
-  "alg": "HS256",
-  "typ": "JWT"
-}
-PAYLOAD:
-{
-  "_id": "63ee75d34d5d8bb410043d7b",
-  "email": "overrillo0@redcross.org",
-  "password": "$2b$10$JDwvxiTQOVYJhjBQrvArp.S8U85EmVi15U8hrc75v/CIiFaoK5tS6",
-  "first_name": "Odille",
-  "last_name": "Verrillo",
-  "address": "9 Drewry Crossing",
-  "city": "Dongdu",
-  "country": "China",
-  "phone": "+86 (709) 713-0630",
-  "credit_card": "4041378755377473",
-  "iat": 1679325635
-}
-```
+![jwt_tool](jwt_tool.png)
 
 So if a JWT token can be decoded, how is it secure? When the user logs in, the token is generated and signed using a certificate or a secret key. Here we see that the algorithm used was `HS256` which means the token payload was hashed with a secret key. If you know the secret, you can verify the signature. If anyone changed the payload of the token, the signature will no longer be valid. This way JWT tokens give the server side a means to send the consumer meaningful information, but it can also ensure that no one has altered the token content.
 
@@ -135,3 +105,7 @@ You'll notice in the output that hashcat estimates it needs only a minute to cra
 ![hashcat output](./hashcat-jwt.png)
 
 With HS256 long randomized secret keys are important. The longer the key, the harder it becomes to crack. The current recommendation is to have keys that are at least 256 bits (or 32 characters) long. It is also common practice to cycle the secret key every now and then. This invalidates any previously generated tokens and renders the old secret useless. 
+
+## Bonus: JWT_TOOL is awesome!
+
+You can do a lot more with jwt_tool. You can use it to tamper with tokens, crack secrets, and execute different types of token attacks (none, key confusion, etc). The folks from [bug bounty platform Intigrity](https://intigrity.com) have an [excellent blog post](https://blog.intigriti.com/2021/07/27/hacker-tools-jwt_tool) on it.  
