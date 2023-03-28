@@ -61,10 +61,11 @@ this.router.post(
 
 You'll notice that when the token is generated, the developer passes the user object (which was fetched and attached during login) in as payload. This is what any passport.js example you have Googled will show you what to do. But in a real life application you need to implement sanitization for the user object or all information ends up in the token payload. 
 
-In this example we've seen two of the [OWASP API top 10](https://owasp.org/www-project-api-security/) vulnerabilities:
+In this example we've seen three of the [OWASP API top 10](https://owasp.org/www-project-api-security/) vulnerabilities:
 
-- [API3: Excessive Data Exposure](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa3-excessive-data-exposure.md) as there is too much information in the JWT token payload.
-- [API7: Security Misconfiguration](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa7-security-misconfiguration.md) as there is no token expiry. 
+- [API2-2019: Broken User Authentication](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa2-broken-user-authentication.md) when an attacker succeed in cracking the user password or token secret.
+- [API3-2019: Excessive Data Exposure](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa3-excessive-data-exposure.md) as there is too much information in the JWT token payload.
+- [API7-2019: Security Misconfiguration](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa7-security-misconfiguration.md) as there is no token expiry. 
 
 ## Note: Cracking passwords 
 

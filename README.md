@@ -54,6 +54,15 @@ Following attack scenarios have been documented and can easily be demonstrated:
 
 The DELIVER API provides the backend for an e-Commerce shop. The API comes pre-loaded with 20 products, 1000 users and over 3000 orders. Via the API you can create and manage a user account, query products, query and create orders. The API also provides administrator users the ability to manage user accounts. The API's secured endpoints require a JWT token to authenticate and authorize (in the case of administrator endpoints).
 
+The application has over 1000 users pre-loaded. You can create extra user accounts via the signup flow in the DELIVER application. Or you can use these pre-loaded users.
+
+```
+email                         password
+overrillo0@redcross.org       QkYvxNZUiP
+aslane8@sciencedirect.com     ihIAcbIBu8
+dyedall9@zdnet.com            oVTyde
+```
+
 ### Part 1: Reconnaissance
 
 An important prerequisite for exploiting vulnerabilities in an API is to understand how it can be used. If you are lucky enough to have API documentation this part of the work is easy. If there is no (public) API documentation you will have to try to reverse engineer it. You can use your browser's DevTools to see what API calls the application is making. 
