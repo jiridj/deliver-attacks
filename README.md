@@ -115,10 +115,9 @@ Attackers are also eager to understand how the application handles things like a
 
 Try to repeatedly invoke the `/auth/reset` endpoint with invalid one-time passwords. You'll notice that again there is no limit on the number of times you can attempt to reset the password. 
 
-> **Info** 
+> [**Attack #4:**](docs/attack-4/README.md)
 > This leaves the application vulnerable to [brute force attacks on the reset password endpoint](docs/attack-4/README.md). 
-
-> **Warning** 
+>
 > **Because the complexity of the one-time password is low, an attacker is guaranteed to compromise all accounts they have been able to identify previously.**
 
 ### Part 3: More reconnaissance
@@ -131,10 +130,9 @@ One of the common vulnerabilities an attacker will look for is if they can acces
 
 Browse to your account page. You'll find your user profile and your order history. Visit both pages and show the API calls that are being made. You can highlight that no parameters other than the bearer token are passed to the API endpoint. This indicates that the token itself is being used in the backend to filter the information for the current user. 
 
-> **Info**
-> Attackers will try to exploit features that exist but aren't meant to be available or to be used in a specific way. Through experimentation an attacker may [find a loop hole in the app logic](docs/attack-5/README.md).
-
-> **Warning**
+> [**Attack #5:**](docs/attack-5/README.md)
+> Attackers will try to exploit features that exist but aren't meant to be available or to be used in a specific way. Through experimentation an attacker may find a loop hole in the app logic.
+> 
 > **Now the attacker is able to identify all user accounts in the system. Combined with the vulnerability on the password reset feature, the attacker can now compromise ALL user accounts.**
 
 ### Bonus: Can I become an administrator?
@@ -143,12 +141,11 @@ As mentioned before, attackers will experiment. They will try to use what they c
 
 As a regular user, there is no evidence that the DELIVER app has any features will elevated privileges. But as mosts apps do, it does too. Log in as an administrator with username `admin@deliver.api` and password `secret` to show the extra menu option that becomes available. Administrators can manage user accounts. You can show the API calls that are being made to the `/admin/users` endpoint. 
 
-> **Info** 
-> Attackers will try different ways to try and [elevate their account's privileges](docs/attack-6/README.md). 
-
-> **Warning**
+> [**Attack #6:**](docs/attack-6/README.md)
+> Attackers will try different ways to try and [elevate their account's privileges]. 
+> 
 > **This is a shortcut to a breach that is as extensive as all other vulnerabilities combined have led to. 
 
 ## Notes
 
-You may have noticed that the process of collecting all API requests and responses via your browser's DevTools is cumbersome. You could use [mitmproxy](https://mitmproxy.org) for your demonstration. Mitmproxy is an open source proxy that you can use for debugging, testing, ... and penetration testing. There is also an ecosystem of useful tools that complement mitmproxy. A great example is [mitmproxy2swagger](https://github.com/alufers/mitmproxy2swagger) which will generate a Swagger specification for you based on a mitmproxy dump.
+Data breaches are costly and you may need to pay hefty fines when one occurs. This great [data breach calculator](https://keeprisk.at-bay.com/svc/data_breach_calculator) helps you get some insights to the impact of the types of data included and size of the breach.
