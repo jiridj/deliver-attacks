@@ -50,6 +50,12 @@ Following attack scenarios have been documented and can easily be demonstrated:
 4. [Enumerate orders](docs/attack-3/README.md)
 5. [Sign up as administrator](docs/attack-5/README.md)
 
+The demo scenario not only uses the DELIVER CLI, but also showcases a few open source tools that are commonly used for penetration testing and hacking. Please refer to their respective websites for installation instructions:
+
+- Man-in-the-Middle Proxy ([mitmproxy.org](https://mitmproxy.org))
+- Hashcat ([hashcat.net](https://hashcat.net/))
+- Jwt_Tool ([ticarpi/jwt_tool](https://github.com/ticarpi/jwt_tool))
+
 ## Demo Scenario
 
 The DELIVER API provides the backend for an e-Commerce shop. The API comes pre-loaded with 20 products, 1000 users and over 3000 orders. Via the API you can create and manage a user account, query products, query and create orders. The API also provides administrator users the ability to manage user accounts. The API's secured endpoints require a JWT token to authenticate and authorize (in the case of administrator endpoints).
