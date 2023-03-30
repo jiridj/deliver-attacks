@@ -28,6 +28,11 @@ When we run the script we see that we've been able to match six email addresses.
 
 ![deliver email-dict](./deliver_dict_emails.gif)
 
+In this example we've seen two of the [OWASP API top 10](https://owasp.org/www-project-api-security/) vulnerabilities:
+
+- [API3-2019: Excessive Data Exposure](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa3-excessive-data-exposure.md) as there is too much information in the JWT token payload.
+- [API4-2019: Lack of Resources & Rate Limiting](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa4-lack-of-resources-and-rate-limiting.md) as there is no restriction on how many times you can try to log in.
+
 # Note 
 
 For convenience reasons I have included a script here that performs the attack for you. [Burp Suite](https://portswigger.net/burp) is a well-known application for penetration testing and provides similar featuers and much more. It has a steep learning curve, but if you are serious about penetration testing you'll want to dig into it.
