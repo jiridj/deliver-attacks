@@ -88,24 +88,28 @@ Browse the home page and products pages. Demonstrate how you can see the API cal
 
 Sign up for an account. See how the `/auth/signup` and `/auth/login` API endpoints are called and that upon login a JWT token is returned. 
 
-> **Info**
-> Now you can demonstrate a first type of vulnerability. This token belongs to your account, but when you can compromise another user's token - for example through cross-site scripting or phishing - you have [a few attack vectors](docs/attack-1/README.md).
+![mitmproxy output for signup](./docs/attack-1/mitmproxy_signup.gif)
 
-> **Warning**
-> **An attacker can compromise individual user accounts through cross-site scripting attacks or phishing. The impact is significant but limited to individual accounts.**
+> [**Attack #1:**](docs/attack-1/README.md)
+> Now you can demonstrate a first type of vulnerability. This token belongs to your account, but when you can get another user's token you have a few attack vectors.
+>
+> **Warning: An attacker can compromise individual user accounts through cross-site scripting attacks or phishing. The impact is significant but limited to individual accounts.**
 
-When testing for vulnerabilities you should make sure to not only test the happy path. Deliberately use a wrong email address and wrong password to see how the application behaves. 
+When testing for vulnerabilities you should make sure to not only test the happy path. Deliberately use a wrong email address and wrong password to see how the application behaves. In the proxy output you can see the responses for failed login attempts. 
 
-> **Info**
-> Here you can demonstrate another type of vulnerability. You'll notice that the error messages on the login page (and the API itself) are too verbose and give attackers too much information. Here the messages help attackers [identify if an email address is registered as an account](docs/attack-2/README.md).
+![mitmproxy output for login attempts](./docs/attack-2/mitmproxy_login_attempts.gif)
+
+> [**Attack #2:**](docs/attack-2/README.md)
+> Here you can demonstrate another type of vulnerability. You'll notice that the error messages on the login page (and the API itself) are too verbose and give attackers too much information. Here the messages help attackers identify if an email address is registered as an account.
+>
+> **The impact remains limited for now. The attacker does not have access to any of the identified accounts.**
 
 Also demonstrate how the application does not limit the number of times you can try to log in with a wrong password. 
 
-> **Info** 
-> This makes the application vulnerable to [brute force or password spraying attacks on the login endpoint](docs/attack-3/README.md). 
-
-> **Warning**
-> **Depending on the information an attacker can collect, for example lists of user info leaked by other website, they can now potentially compromise the identified user accounts.**
+> [**Attack #3:**](docs/attack-3/README.md)
+> This makes the application vulnerable to brute force or password spraying attacks on the login endpoint. 
+>
+> **Depending on the information an attacker can collect, for example lists of user info leaked by other websites, they can now identify user accounts. The impact remains limited, as the attacker does not have access to any of the identified accounts.**
 
 Attackers are also eager to understand how the application handles things like a lost password. Go to the page and reset your own password. Show the API call to the `/auth/reset` endpoint. If you used a real email address for your account, you'll receive an email with a link to reset your password. That link contains a four digit one-time password that allows you to reset your password. If you didn't use a real email address you can get the one-time password from the debug logs on the `deliver-api` container. 
 
