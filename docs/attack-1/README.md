@@ -59,7 +59,7 @@ this.router.post(
 );
 ``` 
 
-You'll notice that when the token is generated, the developer passes the user object (which was fetched and attached during login) in as payload. This is what any passport.js example you have Googled will show you what to do. But in a real life application you need to implement sanitization for the user object or all information ends up in the token payload. 
+You'll notice that when the token is generated, the developer passes the user object (which was fetched and attached during login) in as payload. This is what any passport.js example you have Googled will show you to do. But in a real life application you need to implement sanitization for the user object or all information ends up in the token payload. 
 
 In this example we've seen three of the [OWASP API top 10](https://owasp.org/www-project-api-security/) vulnerabilities:
 
