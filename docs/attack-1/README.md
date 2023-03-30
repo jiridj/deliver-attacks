@@ -1,4 +1,4 @@
-# Compromise a user account
+# Try to crack secrets
 
 A common approach used by attackers is to try and compromise an invididual user's account through cross-site scripting or phishing attempts. These are elaborate attacks that require a lot of preparation with only a limited chance of success. Attackers typically only use this type of attack if they know there is money to be made from compromising the account (ransom, transfers, charges).
 
