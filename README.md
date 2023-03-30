@@ -82,7 +82,7 @@ To make your reconnassance even easier you can use [mitmproxy](https://mitmproxy
 
 Browse the home page and products pages. Demonstrate how you can see the API calls that are being made.
 
-![mitmproxy captures product endpoint invocations](mitmproxy_product.gif)
+![mitmproxy captures product endpoint invocations](docs/attack-1/mitmproxy_product.gif)
 
 ### Part 2: How is the API secured?
 
