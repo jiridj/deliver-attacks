@@ -55,6 +55,7 @@ The demo scenario not only uses the DELIVER CLI, but also showcases a few open s
 - Man-in-the-Middle Proxy ([mitmproxy.org](https://mitmproxy.org))
 - Hashcat ([hashcat.net](https://hashcat.net/))
 - Jwt_Tool ([ticarpi/jwt_tool](https://github.com/ticarpi/jwt_tool))
+- FoxyProxy ([FoxyProxy Standard](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)) with FireFox
 
 ## Demo Scenario
 
@@ -73,11 +74,19 @@ dyedall9@zdnet.com            oVTyde
 
 An important prerequisite for exploiting vulnerabilities in an API is to understand how it can be used. If you are lucky enough to have API documentation this part of the work is easy. If there is no (public) API documentation you will have to try to reverse engineer it. You can use your browser's DevTools to see what API calls the application is making. 
 
+To make your reconnassance even easier you can use [mitmproxy](https://mitmproxy.org). This is a tool that is often used by software developers and penetration testers to debug HTTP and HTTPS traffic. I use it in combination with [FireFox](https://www.mozilla.org/en-US/firefox/new/) and [FoxyProxy](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/). For convenience during the demo I recommend applying a view filter so that you only see the API calls. 
+
+```
+~d <deliver-api-host>
+```
+
 Browse the home page and products pages. Demonstrate how you can see the API calls that are being made.
+
+![mitmproxy captures product endpoint invocations](mitmproxy_product.gif)
 
 ### Part 2: How is the API secured?
 
-Sign up for an account. Show how the `/auth/signup` and `/auth/login` API endpoints are called and that upon login a JWT token is returned. 
+Sign up for an account. See how the `/auth/signup` and `/auth/login` API endpoints are called and that upon login a JWT token is returned. 
 
 > **Info**
 > Now you can demonstrate a first type of vulnerability. This token belongs to your account, but when you can compromise another user's token - for example through cross-site scripting or phishing - you have [a few attack vectors](docs/attack-1/README.md).
