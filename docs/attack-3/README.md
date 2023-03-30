@@ -1,6 +1,7 @@
 # Brute force attacks
 
 - explain brute force and password spraying
-- show `deliver brute-force-pwd`
+  - rockyou.txt
+- show `deliver password-dict`
 
 Note: Burp Suite 

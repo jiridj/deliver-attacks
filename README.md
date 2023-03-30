@@ -40,6 +40,13 @@ ______ _____ _     _____ _   _ ___________
 DELIVER ATTACKS 0.1.0
 ```
 
+The demo scenario not only uses the DELIVER CLI, but also showcases a few open source tools that are commonly used for penetration testing and hacking. Please refer to their respective websites for installation instructions:
+
+- Man-in-the-Middle Proxy ([mitmproxy.org](https://mitmproxy.org))
+- Hashcat ([hashcat.net](https://hashcat.net/))
+- Jwt_Tool ([ticarpi/jwt_tool](https://github.com/ticarpi/jwt_tool))
+- FoxyProxy ([FoxyProxy Standard](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)) with FireFox
+
 ## Attack Scenarios
 
 Following attack scenarios have been documented and can easily be demonstrated:
@@ -49,13 +56,6 @@ Following attack scenarios have been documented and can easily be demonstrated:
 3. [Brute force attacks](docs/attack-4/README.md)
 4. [Enumerate orders](docs/attack-3/README.md)
 5. [Sign up as administrator](docs/attack-5/README.md)
-
-The demo scenario not only uses the DELIVER CLI, but also showcases a few open source tools that are commonly used for penetration testing and hacking. Please refer to their respective websites for installation instructions:
-
-- Man-in-the-Middle Proxy ([mitmproxy.org](https://mitmproxy.org))
-- Hashcat ([hashcat.net](https://hashcat.net/))
-- Jwt_Tool ([ticarpi/jwt_tool](https://github.com/ticarpi/jwt_tool))
-- FoxyProxy ([FoxyProxy Standard](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)) with FireFox
 
 ## Demo Scenario
 
@@ -104,7 +104,7 @@ When testing for vulnerabilities you should make sure to not only test the happy
 >
 > **The impact remains limited for now. The attacker does not have access to any of the identified accounts.**
 
-Also demonstrate how the application does not limit the number of times you can try to log in with a wrong password. 
+Also demonstrate how the application does not limit the number of times you can try to log in with wrong credentials. 
 
 > [**Attack #3:**](docs/attack-3/README.md)
 > This makes the application vulnerable to brute force or password spraying attacks on the login endpoint. 
