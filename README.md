@@ -47,16 +47,6 @@ The demo scenario not only uses the DELIVER CLI, but also showcases a few open s
 - Jwt_Tool ([ticarpi/jwt_tool](https://github.com/ticarpi/jwt_tool))
 - FoxyProxy ([FoxyProxy Standard](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)) with FireFox
 
-## Attack Scenarios
-
-Following attack scenarios have been documented and can easily be demonstrated:
-
-1. [Compromised user token](docs/attack-1/README.md)
-2. [Identify registered email addresses](docs/attack-2/README.md)
-3. [Brute force attacks](docs/attack-4/README.md)
-4. [Enumerate orders](docs/attack-3/README.md)
-5. [Sign up as administrator](docs/attack-5/README.md)
-
 ## Demo Scenario
 
 The DELIVER API provides the backend for an e-Commerce shop. The API comes pre-loaded with 20 products, 1000 users and over 3000 orders. Via the API you can create and manage a user account, query products, query and create orders. The API also provides administrator users the ability to manage user accounts. The API's secured endpoints require a JWT token to authenticate and authorize (in the case of administrator endpoints).
@@ -104,7 +94,7 @@ When testing for vulnerabilities you should make sure to not only test the happy
 >
 > **The impact remains limited for now. The attacker does not have access to any of the identified accounts.**
 
-Also demonstrate how the application does not limit the number of times you can try to log in with wrong credentials. 
+Also demonstrate how the application does not limit the number of times you can try to log in with wrong password for a single email address. 
 
 > [**Attack #3:**](docs/attack-3/README.md)
 > This makes the application vulnerable to brute force or password spraying attacks on the login endpoint. 
