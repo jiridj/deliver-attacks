@@ -26,7 +26,31 @@ POST /auth/login
 
 When we run the script we see that we've been able to match six email addresses. 
 
-![deliver email-dict](./deliver_dict_emails.gif)
+```bash
+______ _____ _     _____ _   _ ___________
+|  _  \  ___| |   |_   _| | | |  ___| ___ \
+| | | | |__ | |     | | | | | | |__ | |_/ /
+| | | |  __|| |     | | | | | |  __||    /
+| |/ /| |___| |_____| |_\ \_/ / |___| |\ \
+|___/ \____/\_____/\___/ \___/\____/\_| \_|
+
+
+Attacking http://192.168.1.23:3333/auth/login
+Dictionary has 1000 email addresses
+Trying 100 batches of 10 emails
+
+[==================================================] 100% 0.0s
+
+Duration: 2.108 secs
+Found 6 accounts
+
+lposthill1@sbwire.com
+pchampkin2@t.co
+nratcliffe3@digg.com
+odettmar4@salon.com
+cdonnell5@desdev.cn
+hhalward6@google.nl
+``` 
 
 In this example we've seen two of the [OWASP API top 10](https://owasp.org/www-project-api-security/) vulnerabilities:
 
@@ -35,4 +59,6 @@ In this example we've seen two of the [OWASP API top 10](https://owasp.org/www-p
 
 # Note 
 
-For convenience reasons I have included a script here that performs the attack for you. [Burp Suite](https://portswigger.net/burp) is a well-known application for penetration testing and provides similar featuers and much more. It has a steep learning curve, but if you are serious about penetration testing you'll want to dig into it.
+- For convenience reasons I have included a script here that performs the attack for you. [Burp Suite](https://portswigger.net/burp) is a well-known application for penetration testing and provides similar featuers and much more. It has a steep learning curve, but if you are serious about penetration testing you'll want to dig into it.
+
+- An awesome resource for checking if you own email address has every been compromised in a breach is the website [';-- Have I Been Pwned?](https://haveibeenpwned.com/).

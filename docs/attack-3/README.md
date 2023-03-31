@@ -14,12 +14,31 @@ max^(lower + upper) - min^(lower + upper) = number of combinations
 12^52 - 6^52 = 390,877,006,466,479,583,232
 ```
 
-Instead attackers often try dictionary attacks. [Rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt) is a well-known asset that contains commonly used passwords and passwords that were previously leaked in breaches. It received its name because its orgin lies in the infamous [RockYou data breach](https://techcrunch.com/2009/12/14/rockyou-hack-security-myspace-facebook-passwords) in 2009. The latest iteration contains over 8.4 billion unique credentials. We're working with an older version here that has roughly 14 million passwords. 
+Instead attackers often try dictionary attacks. [Rockyou.txt](https://www.kaggle.com/datasets/wjburns/common-password-list-rockyoutxt) is a well-known asset that contains commonly used passwords and passwords that were previously leaked in breaches. It received its name because its orgin lies in the infamous [RockYou data breach](https://techcrunch.com/2009/12/14/rockyou-hack-security-myspace-facebook-passwords) in 2009. The latest iteration contains over 8.4 billion unique credentials. For this demo we're working with a small extract here that contains 1000 passwords. Running the script with the full list would take over a week. 
 
-We could try all passwords in the dictionary one-by-one agains each of the discovered accounts. Another option is to do password spraying. This means that you try all the discovered accounts against each password. A side effect of this is that you may circumvent any rate limiting per username as you cycle through lots of usernames before trying the next password. Either way will work here as there is no rate limiting. 
+We could try all passwords in the dictionary one-by-one agains each of the discovered accounts. Another option is to do password spraying. This means that you try all the discovered accounts against each password. A side effect of this is that you may circumvent any rate limiting per username as you cycle through lots of usernames before trying the next password. Either way will work here as there is no rate limiting, but this script applies the spraying technique.
 
 ```bash
 deliver rockyou ./found.txt
-```
-![deliver rockyou](deliver_rockyou.gif)
+______ _____ _     _____ _   _ ___________
+|  _  \  ___| |   |_   _| | | |  ___| ___ \
+| | | | |__ | |     | | | | | | |__ | |_/ /
+| | | |  __|| |     | | | | | |  __||    /
+| |/ /| |___| |_____| |_\ \_/ / |___| |\ \
+|___/ \____/\_____/\___/ \___/\____/\_| \_|
 
+
+Attacking http://192.168.1.23:3333/auth/login
+Spraying 1000 passwords across 6 email addresses
+
+
+[==================================================] 100% 0.0s
+
+Duration: 136.387 secs
+Found 2 credentials
+
+hhalward6@google.nl,qwerty1
+odettmar4@salon.com,scoobydoo
+```
+
+We've been able to identify two accounts that use weak passwords that are listed in rockyou.txt. We now have full access to these two user accounts, including their PII and payment information.
