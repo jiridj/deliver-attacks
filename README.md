@@ -106,9 +106,9 @@ Attackers are also eager to understand how the application handles things like a
 Try to repeatedly invoke the `/auth/reset` endpoint with invalid one-time passwords. You'll notice that again there is no limit on the number of times you can attempt to reset the password. 
 
 > [**Attack #4:**](docs/attack-4/README.md)
-> This leaves the application vulnerable to yet another type of [brute force attack](docs/attack-4/README.md). 
+> This leaves the application vulnerable to yet another type of brute force attacks. 
 >
-> **Because the complexity of the one-time password is low, an attacker is guaranteed to compromise all accounts they have been able to identify previously.**
+> **Because the complexity of the one-time password is low, an attacker is guaranteed to compromise all accounts they have been able to identify previously. We have now compromised all identified registered accounts.**
 
 ### Part 3: More reconnaissance
 
