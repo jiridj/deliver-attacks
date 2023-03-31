@@ -4,7 +4,7 @@ Instead of trying to crack hashes and secrets (see [attack #1](../attack-1/READM
 
 As we know the password requirements, we could try to brute force the password. But this would be a very costly and time consuming operation because of the sheer amount of possible passwords. 
 
-```math
+```
 lower case: 26
 upper case: 26
 minimum length: 6
