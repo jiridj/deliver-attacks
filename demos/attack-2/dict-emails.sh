@@ -1,2 +1,2 @@
 #!/bin/sh
-deliver email-dict ./leaked.txt
+deliver haveibeenpwnd ./leaked.txt

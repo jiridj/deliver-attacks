@@ -65,7 +65,7 @@ In this example we've seen three of the [OWASP API top 10](https://owasp.org/www
 
 - [API2-2019: Broken User Authentication](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa2-broken-user-authentication.md) when an attacker succeed in cracking the user password or token secret.
 - [API3-2019: Excessive Data Exposure](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa3-excessive-data-exposure.md) as there is too much information in the JWT token payload.
-- [API7-2019: Security Misconfiguration](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa7-security-misconfiguration.md) as there is no token expiry. 
+- [API7-2019: Security Misconfiguration](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa7-security-misconfiguration.md) as there is no token expiration. 
 
 ## Note: Cracking passwords 
 

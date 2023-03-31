@@ -2,13 +2,7 @@
 
 A lot of valuable information has been leaked in the past by others. Attackers can easily get lists of email addresses - sometimes even with passwords - of accounts that were leaked elsewhere. Because our API returns errors messages that are too verbose and because there is no rate limiting on the `/auth/login` endpoint, attackers can easily match lists of email addresses with registered accounts. 
 
-Here is a list of [1000 leaked email addresses](../../demos//attack-2/leaked.txt). With a bit of scripting - which I have done for you - you can easily try every email address and see what happens. 
-
-```bash
-deliver email-dict ./leaked.txt
-```
-
-The script sends the email address with password `password` to the API. Using the error message (`Wrong email address` or `Wrong password`) we can identify those email addresses that are registered with an account.
+Here is a list of [1000 leaked email addresses](../../demos//attack-2/leaked.txt). With a bit of scripting - which I have done for you - you can easily try every email address and see what happens. The script sends the email address with password `password` to the API. Using the error message (`Wrong email address` or `Wrong password`) we can identify those email addresses that are registered with an account.
 
 ```
 POST /auth/login
@@ -27,6 +21,7 @@ POST /auth/login
 When we run the script we see that we've been able to match six email addresses. 
 
 ```bash
+deliver haveibeenpwned ./leaked.txt
 ______ _____ _     _____ _   _ ___________
 |  _  \  ___| |   |_   _| | | |  ___| ___ \
 | | | | |__ | |     | | | | | | |__ | |_/ /
@@ -56,6 +51,7 @@ In this example we've seen two of the [OWASP API top 10](https://owasp.org/www-p
 
 - [API3-2019: Excessive Data Exposure](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa3-excessive-data-exposure.md) as there is too much information in the JWT token payload.
 - [API4-2019: Lack of Resources & Rate Limiting](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa4-lack-of-resources-and-rate-limiting.md) as there is no restriction on how many times you can try to log in.
+- [API7-2019: Security Misconfiguration](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa7-security-misconfiguration.md) as the error messages are too verbose and give an attacker clues about how to identify accounts. 
 
 # Note 
 
