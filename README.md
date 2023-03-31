@@ -92,14 +92,14 @@ When testing for vulnerabilities you should make sure to not only test the happy
 > [**Attack #2:**](docs/attack-2/README.md)
 > Here you can demonstrate another type of vulnerability. You'll notice that the error messages on the login page (and the API itself) are too verbose and give attackers too much information. Here the messages help attackers identify if an email address is registered as an account.
 >
-> **The impact remains limited for now. The attacker does not have access to any of the identified accounts.**
+> **Depending on the information an attacker can collect, for example lists of user info leaked by other websites, they can now identify user accounts. The impact remains limited, as the attacker does not have access to any of the identified accounts.**
 
 Also demonstrate how the application does not limit the number of times you can try to log in with wrong password for a single email address. 
 
 > [**Attack #3:**](docs/attack-3/README.md)
 > This makes the application vulnerable to brute force or password spraying attacks on the login endpoint. 
 >
-> **Depending on the information an attacker can collect, for example lists of user info leaked by other websites, they can now identify user accounts. The impact remains limited, as the attacker does not have access to any of the identified accounts.**
+> **With the credential information collected from previous breaches, the attacker can target identified accounts with large dictionaries of leaked passwords. In our demo scenario we are able to find the passwords for two accounts. These accounts have now been compromised and we have complete access to their data, including PII and payment information.**
 
 Attackers are also eager to understand how the application handles things like a lost password. Go to the page and reset your own password. Show the API call to the `/auth/reset` endpoint. If you used a real email address for your account, you'll receive an email with a link to reset your password. That link contains a four digit one-time password that allows you to reset your password. If you didn't use a real email address you can get the one-time password from the debug logs on the `deliver-api` container. 
 
