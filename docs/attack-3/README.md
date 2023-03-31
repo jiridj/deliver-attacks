@@ -16,7 +16,7 @@ max^(lower + upper) - min^(lower + upper) = number of combinations
 
 Instead attackers often try dictionary attacks. [Rockyou.txt](https://www.kaggle.com/datasets/wjburns/common-password-list-rockyoutxt) is a well-known asset that contains commonly used passwords and passwords that were previously leaked in breaches. It received its name because its orgin lies in the infamous [RockYou data breach](https://techcrunch.com/2009/12/14/rockyou-hack-security-myspace-facebook-passwords) in 2009. The latest iteration contains over 8.4 billion unique credentials, but is massive size renders it less useful. The most commonly used version is the 2019 version which contains over 14 million unique credentials.
 
-We could try all passwords in the dictionary one-by-one agains each of the discovered accounts. Another option is to do password spraying. This means that you try all the discovered accounts against each password. A side effect of this is that you may circumvent any rate limiting per username as you cycle through lots of usernames before trying the next password. Either way will work here as there is no rate limiting, but this script applies the spraying technique. For this demo we're working with a small extract here that contains 1000 passwords. Running the script with the full list would take too much time.
+We could try all passwords in the dictionary one-by-one against each of the discovered accounts. Another option is to apply password spraying. This means that you try all the discovered accounts against each password. A side effect of this is that you may circumvent any rate limiting per username as you cycle through lots of usernames before trying the next password. Either way will work here as there is no rate limiting, but this script applies the spraying technique. For this demo we're working with a small extract that contains 1000 passwords. Running the script with the full list would take too much time.
 
 ```bash
 deliver rockyou ./found.txt
@@ -41,8 +41,8 @@ hhalward6@google.nl,qwerty1
 odettmar4@salon.com,scoobydoo
 ```
 
+We've been able to identify two accounts that use weak passwords that are listed in rockyou.txt. We now have full access to these two user accounts, including their PII and payment information.
+
 In this example we've seen another occurrence of an [OWASP API top 10](https://owasp.org/www-project-api-security/) vulnerability:
 
 - [API4-2019: Lack of Resources & Rate Limiting](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa4-lack-of-resources-and-rate-limiting.md) as there is no restriction on how many times you can try to log in.
-
-We've been able to identify two accounts that use weak passwords that are listed in rockyou.txt. We now have full access to these two user accounts, including their PII and payment information.
