@@ -112,18 +112,22 @@ Try to repeatedly invoke the `/auth/reset` endpoint with invalid one-time passwo
 
 ### Part 3: More reconnaissance
 
-Let's do more reconnaissance and place an order. The checkout process helps to reveal what kind of data is being stored by the application. The checkout wizard forces you to fill out your profile data and stores it. You can show the API calls that are being made. 
+Let's do more reconnaissance and place an order. The checkout process helps to reveal what kind of data is being stored by the application. The checkout wizard forces you to fill out your profile data and stores it. You can show the API calls that are being made in mitmproxy. 
 
 ### Part 4: Can I access other user's data?
 
 One of the common vulnerabilities an attacker will look for is if they can access - and potentially modify - other users' data. Our reconnaissance so far has shown that the application is designed to only give the user access to their own account's data. But is there a way to access another user's data?
 
-Browse to your account page. You'll find your user profile and your order history. Visit both pages and show the API calls that are being made. You can highlight that no parameters other than the bearer token are passed to the API endpoint. This indicates that the token itself is being used in the backend to filter the information for the current user. 
+Browse to your account page. You'll find your user profile and your order history. Visit both pages and show the API calls that are being made. 
+
+![mitmproxy logs for account and order info](docs/attack-5/mitmproxy_order_history.gif)
+
+You can highlight that no parameters other than the bearer token are passed to the API endpoint. This indicates that the token itself is being used in the backend to filter the information for the current user. 
 
 > [**Attack #5:**](docs/attack-5/README.md)
 > Attackers will try to exploit features that exist but aren't meant to be available or to be used in a specific way. Through experimentation an attacker may find a loop hole in the app logic.
 > 
-> **Now the attacker is able to identify all user accounts in the system. Combined with the vulnerability on the password reset feature, the attacker can now compromise ALL user accounts.**
+> **Now the attacker is able to identify all user accounts in the system (with orders). Combined with the vulnerability on the password reset feature, the attacker can now compromise ALL user accounts.**
 
 ### Bonus: Can I become an administrator?
 
