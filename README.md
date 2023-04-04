@@ -136,7 +136,7 @@ As mentioned before, attackers will experiment. They will try to use what they c
 As a regular user, there is no evidence that the DELIVER app has any features will elevated privileges. But as mosts apps do, it does too. Log in as an administrator with username `admin@deliver.api` and password `secret` to show the extra menu option that becomes available. Administrators can manage user accounts. You can show the API calls that are being made to the `/admin/users` endpoint. 
 
 > [**Attack #6:**](docs/attack-6/README.md)
-> Attackers will try different ways to try and [elevate their account's privileges]. 
+> Attackers will try different ways to try and elevate their account's privileges. Apps will use different ways to manage user roles, so there is no guarantee that they'll succeed but with a little trial-and-error they might just get lucky.
 > 
 > **This is a shortcut to a breach that is as extensive as all other vulnerabilities combined have led to. 
 

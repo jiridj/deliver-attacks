@@ -4,7 +4,7 @@ A lot of valuable information has been leaked in the past by others. Attackers c
 
 Here is a list of [1000 leaked email addresses](../../demos//attack-2/leaked.txt). With a bit of scripting - which I have done for you - you can easily try every email address and see what happens. The script sends the email address with password `password` to the API. Using the error message (`Wrong email address` or `Wrong password`) we can identify those email addresses that are registered with an account.
 
-```
+```bash
 POST /auth/login
 {
   "email": "hdegoe0@netvibes.com",
