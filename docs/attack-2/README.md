@@ -2,8 +2,6 @@
 
 A lot of valuable information has been leaked in the past by others. Attackers can easily get lists of email addresses - sometimes even with passwords - of accounts that were leaked elsewhere. Because our API returns errors messages that are too verbose and because there is no rate limiting on the `/auth/login` endpoint, attackers can easily match lists of email addresses with registered accounts. 
 
-Here is a list of [1000 leaked email addresses](../../demos//attack-2/leaked.txt). With a bit of scripting - which I have done for you - you can easily try every email address and see what happens. The script sends the email address with password `password` to the API. Using the error message (`Wrong email address` or `Wrong password`) we can identify those email addresses that are registered with an account.
-
 ```bash
 curl -X POST http://<hostname>:<port>/auth/login -H "Content-Type: application/json" -d "{\"email\":\"doesnotexist@gmail.com\",\"password\":\"password123\"}"
 {"status":401,"message":"Wrong email address"}
@@ -12,7 +10,7 @@ curl -X POST http://<hostname>:<port>/auth/login -H "Content-Type: application/j
 {"status":401,"message":"Wrong password"}
 ```
 
-When we run the script we see that we've been able to match six email addresses. 
+Here is a list of [1000 leaked email addresses](../../demos//attack-2/leaked.txt). With a bit of scripting - which I have done for you - you can easily try every email address and see what happens. The script sends the email address with password `password` to the API. Using the error message (`Wrong email address` or `Wrong password`) we can identify those email addresses that are registered with an account. When we run the script we see that we've been able to match six email addresses. 
 
 ```bash
 deliver haveibeenpwned ./leaked.txt
