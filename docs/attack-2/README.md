@@ -41,7 +41,6 @@ hhalward6@google.nl
 
 In this example we've seen two of the [OWASP API top 10](https://owasp.org/www-project-api-security/) vulnerabilities:
 
-- [API3-2019: Excessive Data Exposure](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa3-excessive-data-exposure.md) as there is too much information in the JWT token payload.
 - [API4-2019: Lack of Resources & Rate Limiting](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa4-lack-of-resources-and-rate-limiting.md) as there is no restriction on how many times you can try to log in.
 - [API7-2019: Security Misconfiguration](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa7-security-misconfiguration.md) as the error messages are too verbose and give an attacker clues about how to identify accounts. 
 
